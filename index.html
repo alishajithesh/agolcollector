@@ -25,10 +25,10 @@
     <!-- loading the modules -->
     <script>
       require(
-        ["esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Locate"],
-        (esriConfig, Map, MapView, Locate) => {
+        ["esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search"],
+        (esriConfig, Map, MapView, Locate, Search) => {
           console.log("Modules loaded!");
-    // Your existing code here
+
           // Adding API key
           esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurJAjpmUTTy7W5MCrEwxmdC9gj5pL2Is8nXls7pQcdVY1loJldYik3Z1SLVSkjfSjIDp7MYyBE2kSNGyC4d1ymDsk1R98W3hZKiytMkMSrxOogET_jdTZB5Eq7bTzInOvMQejHXdWX7O4osDpoEWDP86etO6yW26rBZW2kxtDje7qlWJ3ijTDqcDkqN-9F4YidBPypi4MQjpte2YNF8Mi60Y.AT1_d8aLoWsA";
 
@@ -44,18 +44,29 @@
           });
 
           const locateBtn = new Locate({
-          view: view
-        });
+            view: view,
+          });
 
-        // Add the locate widget to the top left corner of the view
-        view.ui.add(locateBtn, {
-          position: "top-left"
-        });
-        
-        view.ui.add(locateBtn, {
-  position: "top-left"
-});
-console.log("Locate widget added");
+          // Add the locate widget to the top left corner of the view
+          view.ui.add(locateBtn, {
+            position: "top-left",
+          });
+
+          console.log("Locate widget added");
+
+          // Add the Search widget
+          const searchWidget = new Search({
+            view: view,
+            locationEnabled: true, // Allow geolocation in search
+            popupEnabled: true, // Show popup with search results
+          });
+
+          // Add the search widget to the top right corner of the view
+          view.ui.add(searchWidget, {
+            position: "top-right",
+          });
+
+          console.log("Search widget added");
         }
       );
     </script>
