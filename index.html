@@ -25,8 +25,15 @@
     <!-- loading the modules -->
     <script>
       require(
-        ["esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search"],
-        (esriConfig, Map, MapView, Locate, Search) => {
+        [
+          "esri/config", 
+          "esri/Map", 
+          "esri/views/MapView", 
+          "esri/widgets/Locate", 
+          "esri/widgets/Search", 
+          "esri/layers/FeatureLayer"
+        ],
+        (esriConfig, Map, MapView, Locate, Search, FeatureLayer) => {
           console.log("Modules loaded!");
 
           // Adding API key
@@ -67,6 +74,16 @@
           });
 
           console.log("Search widget added");
+
+          // Create a FeatureLayer using the survey results URL
+          const surveyLayer = new FeatureLayer({
+            url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/survey123_c969d9d70b5a45a2ab6d94a9074c0e5d_results/FeatureServer"
+          });
+
+          // Add the FeatureLayer to the map
+          map.add(surveyLayer);
+
+          console.log("FeatureLayer added to the map");
         }
       );
     </script>
